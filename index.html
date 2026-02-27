@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASES GmbH Elektroniksysteme</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      background: #fff;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 2rem;
+      z-index: 100;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    nav img.logo {
+      height: 48px;
+      display: block;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #003366;
+      font-weight: bold;
+      font-size: 0.95rem;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    nav ul li a:hover {
+      border-bottom-color: #003366;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    section:not(:last-child) {
+      border-bottom: 1px solid #eee;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      color: #003366;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: #003366;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      color: #333;
+      margin-top: 1.2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    p {
+      margin-bottom: 0.8rem;
+    }
+
+    ul {
+      margin: 0.5rem 0 0.8rem 1.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.3rem;
+    }
+
+    /* ── HERO CAROUSEL (CSS crossfade, no translateX → resize-proof) ── */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 460px;
+      overflow: hidden;
+    }
+
+    /* no flex strip needed — each slide sits on top of the other */
+    .carousel-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-item {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      /* 3 slides × 4 s visible = 12 s total cycle */
+      animation: fade 12s infinite;
+    }
+
+    /* stagger each slide by one third of the cycle */
+    .carousel-item:nth-child(1) { animation-delay:  0s; }
+    .carousel-item:nth-child(2) { animation-delay:  4s; }
+    .carousel-item:nth-child(3) { animation-delay:  8s; }
+
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-caption {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .carousel-caption h3 {
+      color: #fff;
+      margin: 0 0 0.2rem;
+      font-size: 1.4rem;
+    }
+
+    .carousel-caption p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    /*
+      Each slide is visible for ~4 s out of 12 s total.
+      Fade in over 0.5 s, hold, fade out over 0.5 s.
+      Percentages are relative to the 12 s duration.
+    */
+    @keyframes fade {
+      0%       { opacity: 0; }
+      4%       { opacity: 1; }   /* fully visible */
+      29%      { opacity: 1; }   /* hold */
+      33%      { opacity: 0; }   /* faded out, stay invisible for rest */
+      100%     { opacity: 0; }
+    }
+
+    /* ── SERVICE BLOCKS ── */
+    .block {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+    }
+
+    .block img.block-img {
+      width: 280px;
+      flex-shrink: 0;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    .block-text {
+      flex: 1;
+    }
+
+    .block-text h2:first-child {
+      margin-top: 0;
+    }
+
+    /* ── CUSTOMER LOGOS ── */
+    .customer-section {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    .customer-section h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    .logo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem 2.5rem;
+    }
+
+    .logo-grid img {
+      max-height: 60px;
+      max-width: 140px;
+      object-fit: contain;
+      filter: grayscale(30%);
+      transition: filter 0.2s;
+    }
+
+    .logo-grid img:hover {
+      filter: grayscale(0%);
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-grid address {
+      font-style: normal;
+      line-height: 1.8;
+    }
+
+    .contact-grid address a {
+      color: #003366;
+    }
+
+    /* ── LEGAL SECTIONS (AGB / Datenschutz) ── */
+    .legal h3 {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #003366;
+      color: #ccc;
+      padding: 2rem;
+      margin-top: 4rem;
+    }
+
+    footer h5 {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #aad4ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer .footer-copy {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      border-top: 1px solid #335;
+      padding-top: 0.8rem;
+      text-align: center;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav {
+        padding: 0.5rem 1rem;
+      }
+
+      .block {
+        flex-direction: column;
+      }
+
+      .block img.block-img {
+        width: 100%;
+        max-height: 220px;
+      }
+
+      .carousel {
+        height: 220px;
+      }
+
+
+      section {
+        padding: 2rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════ NAVIGATION ══════════════ -->
+  <nav>
+    <a href="#home">
+      <img src="assets/logo/logo_dark_blue.png" alt="CASES GmbH Logo" class="logo">
+    </a>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#leistungen">Leistungen</a></li>
+      <li><a href="#unternehmen">Unternehmen</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════ HERO CAROUSEL ══════════════ -->
+  <div class="carousel" id="home">
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <img src="assets/carousel/robot.jpg" alt="Roboteranlage">
+        <div class="carousel-caption">
+          <h3>Willkommen</h3>
+          <p>bei der CASES GmbH</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/carousel/teil.jpg" alt="Elektronikteil">
+        <div class="carousel-caption">
+          <h3>CASES GmbH Elektroniksysteme</h3>
+          <p>Automatisierung ist unsere Profession</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/carousel/presse.jpg" alt="Presse">
+        <div class="carousel-caption">
+          <h3>CASES GmbH Elektroniksysteme</h3>
+          <p>Automatisierung ist unsere Profession</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ HOME / WILLKOMMEN ══════════════ -->
+  <section>
+    <h1>Willkommen bei der CASES GmbH!</h1>
+    <p>Wir sind ein Unternehmen, das sich auf Projekte im industriellen Anlagenbau spezialisiert hat. Dabei können wir
+      folgende Leistungen anbieten:</p>
+    <ul>
+      <li>Planung, Projektierung und Dokumentation von elektrischen Anlagen und Maschinen</li>
+      <li>Hardwareplanung mit CAE-System, ePlan und TurboCAD</li>
+      <li>Programmierung der Automatisierungssysteme, Visualisierung</li>
+      <li>Projektierung, Aufbau und Programmierung von Robotersystemen</li>
+      <li>Projektierung von Mess- und Regeltechnik, Antriebstechnik</li>
+      <li>Modernisierung, Erweiterung und Optimierung vorhandener Anlagen</li>
+      <li>Mechanische und elektrische Inbetriebnahme</li>
+      <li>Ersteinweisung und Schulung</li>
+      <li>Kundendienst</li>
+    </ul>
+    <p>Dabei sehen wir uns als Möglichkeit, in der arbeitsintensiven Zeit der Projektbetreuung und Inbetriebnahme zu
+      unterstützen bzw. selbst die Betreuung der Projekte zu übernehmen, insbesondere wenn Ihre Ingenieure zeitgleich
+      mehrere Projekte betreuen und Präsenz vor Ort erforderlich wird.</p>
+    <p>Unsere besondere Spezialisierung liegt in der Automatisierung mit den Simatic S7 klassisch mit Step7 oder TIA
+      Portal mit Profinetankopplung. Aber auch andere Bussysteme wie z.B. Profibus, MODBus, Devicenet, Interbus und
+      CANBus sind in von uns betreuten Projekten zum Einsatz gekommen.</p>
+    <p>Erfahrungen haben wir mit der Programmierung und Einbindung von KUKA Industrierobotern KRC32, KRC1 und KRC2
+      sowie KRC4 in den Automatisierungsprozess. Unsere Hauptauftraggeber sind Anlagenbauer und industrielle
+      Anlagenbetreiber im weltweiten Einsatz aus diversen Industriezweigen.</p>
+
+    <div class="customer-section">
+      <h2>Unsere Kunden sind unsere beste Referenz.</h2>
+      <div class="logo-grid">
+        <img src="assets/customer_logos/bmw.png" alt="BMW">
+        <img src="assets/customer_logos/Voestalpine.png" alt="Voestalpine">
+        <img src="assets/customer_logos/SAS_Logo.svg" alt="SAS">
+        <img src="assets/customer_logos/diezel.png" alt="Diezel">
+        <img src="assets/customer_logos/elektronicon.jpg" alt="Elektronicon">
+        <img src="assets/customer_logos/futurpipe.png" alt="Futurpipe">
+        <img src="assets/customer_logos/logo_schuler.gif" alt="Schuler">
+        <img src="assets/customer_logos/mubea.png" alt="Mubea">
+        <img src="assets/customer_logos/novelis.png" alt="Novelis">
+        <img src="assets/customer_logos/pacik.gif" alt="Pacik">
+        <img src="assets/customer_logos/raab.jpg" alt="Raab">
+        <img src="assets/customer_logos/smt.jpg" alt="SMT">
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ LEISTUNGEN ══════════════ -->
+  <section id="leistungen">
+    <h1>Leistungen</h1>
+
+    <div class="block">
+      <img src="assets/image_blocks/robot.jpg" alt="Roboter" class="block-img">
+      <div class="block-text">
+        <h2>Von der Idee zur fertigen Anlage.</h2>
+        <p>Wir betreuen die automatisierungstechnische Seite Ihres Projektes in all seinen Phasen.
+          Von der Entwicklung der Ideen über die Projektierung der Hard- und Software bis hin zum Aufbau und der
+          Inbetriebnahme beim Kunden. Eingeschlossen sind selbstverständlich alle erforderlichen Dokumentationen,
+          Betriebsanleitungen sowie Schulung/Unterweisung des Bedienpersonals.</p>
+
+        <h2>Unser Wissen ist Ihr Vorteil.</h2>
+        <p>Wir haben Erfahrungen mit den verschiedensten Automatisierungs- und Antriebssystemen und deren
+          Projektierung, Programmierung und Inbetriebnahme. Zum Beispiel:</p>
+        <ul>
+          <li>Siemens TIA Portal Simatic STEP5/STEP7, Graph7, PCS7, ...</li>
+          <li>Siemens ProTool, WinCC, OPC</li>
+          <li>Profibus DP, CAN, ASI, Interbus, LWL</li>
+          <li>AllenBradley</li>
+          <li>AEG</li>
+          <li>SEW Eurodrive</li>
+          <li>Danfoss</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block">
+      <img src="assets/image_blocks/worker.jpg" alt="Mitarbeiter" class="block-img">
+      <div class="block-text">
+        <h2>Teil-Engineering.</h2>
+        <p>Sie benötigen für Teilabschnitte Ihres Projektes Unterstützung? Sie haben zeitliche Engpässe?
+          Wir unterstützen Sie gerne in den arbeitsintensiven Zeiten der Projektbearbeitung und Inbetriebnahme sowie
+          in der Betreuung Ihrer Anlagen in der Zeit nach der Inbetriebnahme. Dabei bieten wir Ihnen insbesondere
+          folgende Leistungen an:</p>
+        <ul>
+          <li>Planung, Projektierung und Dokumentation von elektrischen Anlagen und Maschinen</li>
+          <li>Hardwareplanung mit CAE-System</li>
+          <li>Programmierung der Automatisierungssysteme und Visualisierung</li>
+          <li>Projektierung der Mess- und Regeltechnik, Antriebstechnik</li>
+          <li>Mechanische und elektrische Inbetriebnahme beim Kunden</li>
+          <li>Einweisung und Schulung des Kunden</li>
+          <li>Kundendienst</li>
+        </ul>
+
+        <h2>Immer up-to-date.</h2>
+        <p>Die Modernisierung älterer Anlagen birgt ein hohes Potential an Kosteneinsparungen, zum Beispiel durch:</p>
+        <ul>
+          <li>Höhere Qualität</li>
+          <li>Geringere Taktzeiten</li>
+          <li>Geringerer Wartungsaufwand</li>
+          <li>Preiswertere Ersatzteile</li>
+        </ul>
+        <p>Wir beraten Sie gerne über die Modernisierungsmöglichkeiten Ihrer Anlagen, unterstützen Sie bei diesen
+          Maßnahmen oder führen diese selbstständig durch.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <img src="assets/image_blocks/electrics.png" alt="Elektrik" class="block-img">
+      <div class="block-text">
+        <h2>Ersatzteile</h2>
+        <p>Auch im Servicefall stehen wir Ihnen mit Rat und Tat zur Seite. Wir besorgen schnell und unkompliziert
+          alle nötigen Ersatzteile und führen die Reparatur aus. Um Ausfallzeiten minimieren zu können, stellen wir
+          Ihnen auch gerne für Ihre Anlage ein Ersatzteilpaket zusammen.</p>
+
+        <h2>Produktwechsel</h2>
+        <p>Sie wollen Ihr Produkt umstellen und müssen die Software und auch eventuell schnell anpassen? Auch hierbei
+          können Sie auf unsere Unterstützung zählen. Wir passen das Steuerungsprogramm den neuen benötigten
+          Funktionen und Bewegungsabläufen an und erweitern Ihre Anlage um die nötige mechanische und elektronische
+          Auslastung und erhöhen damit die Anlagenverfügbarkeit.</p>
+      </div>
+    </div>
+
+    <div class="block">
+      <img src="assets/image_blocks/construction.png" alt="Konstruktion" class="block-img">
+      <div class="block-text">
+        <h2>Simulation</h2>
+        <p>Bei der Installation einer Roboterzelle sind viele Dinge zu beachten. Wir unterstützen Sie bei der
+          Planung Ihres neuen Roboterarbeitsplatzes von der Idee über den Aufbau bis hin zur Inbetriebnahme.</p>
+        <p>Für die Planung stehen uns leistungsstarke grafische Simulationstools zur Verfügung. Wir planen und
+          optimieren mit Ihnen gemeinsam in diesen Tools Ihr zukünftiges Robotersystem. Sie können virtuell
+          miterleben, wie sich Ihr Roboter später bewegen wird.</p>
+
+        <h2>SPS – TIA Portal – CODESYS</h2>
+        <p>SPS Programmierung aktuell im TIA Portal aber auch im bewährten Step7 Umfeld; Programmierung im CODESYS
+          oder TWINCAT; Bewegungsprogrammierung für Echtzeitanwendungen.</p>
+
+        <h2>Maschinenbau</h2>
+        <p>Konstruktion und Aufbau von Sondermaschinen, Vorrichtungen und Anlagenteilen. Wir bieten:</p>
+        <ul>
+          <li>Automatisierung</li>
+          <li>Maschinenbau: Konstruktion mit TurboCAD</li>
+          <li>Softwareentwicklung</li>
+          <li>Elektrokonstruktion mit ePlan</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>Wir würden uns freuen, Sie bei Ihren Vorhaben in der Automatisierung beraten und unterstützen zu dürfen.
+      Dabei erarbeiten wir eine mit Ihnen abgestimmte, speziell auf Ihre betrieblichen Abläufe zugeschnittene
+      Soft- bzw. Hardwarelösung.</p>
+  </section>
+
+  <!-- ══════════════ UNTERNEHMEN ══════════════ -->
+  <section id="unternehmen">
+    <h1>Über uns</h1>
+    <p>Wir sind die CASES GmbH – ein Unternehmen, das sich auf den industriellen Anlagenbau und die Automatisierungstechnik spezialisiert hat.
+      Mit langjähriger Erfahrung und einem breiten Know-how in der SPS-Programmierung, Robotiksystemen und der Elektroniksystemtechnik unterstützen wir
+      unsere Kunden von der Idee bis zur fertigen Anlage.</p>
+  </section>
+
+  <!-- ══════════════ KONTAKT ══════════════ -->
+  <section id="kontakt">
+    <h1>Kontakt</h1>
+    <div class="contact-grid">
+      <address>
+        <strong>CASES GmbH</strong><br>
+        Lämmertriebe 13<br>
+        OT Breitenbach<br>
+        06722 Wetterzeube<br><br>
+        Telefon: <a href="tel:034425997748">034425 / 997748</a><br>
+        Telefax: 034425 / 997749<br>
+        E-Mail: <a href="mailto:info@cases-gmbh.de">info@cases-gmbh.de</a>
+      </address>
+    </div>
+  </section>
+
+  <!-- ══════════════ IMPRESSUM ══════════════ -->
+  <section id="impressum">
+    <h1>Impressum</h1>
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p>Cases GmbH<br>
+      Lämmertriebe 13<br>
+      OT Breitenbach<br>
+      06722 Wetterzeube</p>
+    <p>Handelsregister: HRB17864<br>
+      Registergericht: AG Stendal</p>
+    <p><strong>Vertreten durch:</strong><br>
+      Carsten Andreas Schulz</p>
+
+    <h2>Kontakt</h2>
+    <p>Telefon: 034425 997748<br>
+      Telefax: 034425 997749<br>
+      E-Mail: <a href="mailto:info@cases-gmbh.de">info@cases-gmbh.de</a></p>
+
+    <h2>Umsatzsteuer-ID</h2>
+    <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+      DE277268817</p>
+
+    <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
+    <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
+      teilzunehmen.</p>
+
+    <h3>Haftung für Inhalte</h3>
+    <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen
+      Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
+      übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf
+      eine rechtswidrige Tätigkeit hinweisen.</p>
+    <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen
+      bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer
+      konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese
+      Inhalte umgehend entfernen.</p>
+
+    <h3>Haftung für Links</h3>
+    <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
+      Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten
+      Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+
+    <h3>Urheberrecht</h3>
+    <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
+      Urheberrecht. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch
+      gestattet.</p>
+  </section>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer>
+    <h5>Kontakt</h5>
+    <p>Lämmertriebe 13 &nbsp;|&nbsp; 06722 Wetterzeube OT Breitenbach</p>
+    <p>Telefon: <a href="tel:034425997748">034425 / 997748</a> &nbsp;|&nbsp;
+       Telefax: 034425 / 997749 &nbsp;|&nbsp;
+       E-Mail: <a href="mailto:info@cases-gmbh.de">info@cases-gmbh.de</a></p>
+    <div class="footer-copy">
+      <p>&copy; 2026 CASES GmbH. All rights reserved.
+        &nbsp;|&nbsp; <a href="#impressum">Impressum</a>
+        &nbsp;|&nbsp; <a href="#kontakt">Kontakt</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
