@@ -1,596 +1,1044 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CASES GmbH Elektroniksysteme</title>
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASE Elektroniksysteme</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      color: #333;
-      background: #fff;
-    }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
 
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      background: #fff;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem 2rem;
-      z-index: 100;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+        /* ── NAV ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem 2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
 
-    nav img.logo {
-      height: 48px;
-      display: block;
-    }
+        nav img.logo {
+            height: 48px;
+            display: block;
+        }
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
 
-    nav ul li a {
-      text-decoration: none;
-      color: #003366;
-      font-weight: bold;
-      font-size: 0.95rem;
-      padding: 0.25rem 0;
-      border-bottom: 2px solid transparent;
-      transition: border-color 0.2s;
-    }
+        nav ul li a {
+            text-decoration: none;
+            color: #003366;
+            font-weight: bold;
+            font-size: 0.95rem;
+            padding: 0.25rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
 
-    nav ul li a:hover {
-      border-bottom-color: #003366;
-    }
+        nav ul li a:hover {
+            border-bottom-color: #003366;
+        }
 
-    /* ── SECTIONS ── */
-    section {
-      padding: 3rem 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+        /* ── TYPOGRAPHY ── */
+        h1 {
+            font-size: 1.8rem;
+            color: #003366;
+            margin-bottom: 1rem;
+        }
 
-    section:not(:last-child) {
-      border-bottom: 1px solid #eee;
-    }
+        h2 {
+            font-size: 1.3rem;
+            color: #003366;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
 
-    h1 {
-      font-size: 1.8rem;
-      color: #003366;
-      margin-bottom: 1rem;
-    }
+        h3 {
+            font-size: 1.05rem;
+            color: #333;
+            margin-top: 1.2rem;
+            margin-bottom: 0.4rem;
+        }
 
-    h2 {
-      font-size: 1.3rem;
-      color: #003366;
-      margin-top: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
+        p {
+            margin-bottom: 0.8rem;
+        }
 
-    h3 {
-      font-size: 1.05rem;
-      color: #333;
-      margin-top: 1.2rem;
-      margin-bottom: 0.4rem;
-    }
+        ul {
+            margin: 0.5rem 0 0.8rem 1.5rem;
+        }
 
-    p {
-      margin-bottom: 0.8rem;
-    }
+        ul li {
+            margin-bottom: 0.3rem;
+        }
 
-    ul {
-      margin: 0.5rem 0 0.8rem 1.5rem;
-    }
+        /* ── SECTIONS (index.html) ── */
+        section {
+            padding: 3rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
 
-    ul li {
-      margin-bottom: 0.3rem;
-    }
+        section:not(:last-child) {
+            border-bottom: 1px solid #eee;
+        }
 
-    /* ── HERO CAROUSEL (CSS crossfade, no translateX → resize-proof) ── */
-    .carousel {
-      position: relative;
-      width: 100%;
-      height: 460px;
-      overflow: hidden;
-    }
+        /* ── MAIN (subpages) ── */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
 
-    /* no flex strip needed — each slide sits on top of the other */
-    .carousel-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
+        /* ── HERO CAROUSEL ── */
+        .carousel {
+            position: relative;
+            width: 100%;
+            height: 460px;
+            overflow: hidden;
+        }
 
-    .carousel-item {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      /* 3 slides × 4 s visible = 12 s total cycle */
-      animation: fade 12s infinite;
-    }
+        .carousel-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
 
-    /* stagger each slide by one third of the cycle */
-    .carousel-item:nth-child(1) { animation-delay:  0s; }
-    .carousel-item:nth-child(2) { animation-delay:  4s; }
-    .carousel-item:nth-child(3) { animation-delay:  8s; }
+        .carousel-item {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            animation: fade 12s infinite;
+        }
 
-    .carousel-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+        .carousel-item:nth-child(1) {
+            animation-delay: 0s;
+        }
 
-    .carousel-caption {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
-      text-align: center;
-      white-space: nowrap;
-    }
+        .carousel-item:nth-child(2) {
+            animation-delay: 4s;
+        }
 
-    .carousel-caption h3 {
-      color: #fff;
-      margin: 0 0 0.2rem;
-      font-size: 1.4rem;
-    }
+        .carousel-item:nth-child(3) {
+            animation-delay: 8s;
+        }
 
-    .carousel-caption p {
-      margin: 0;
-      font-size: 1rem;
-    }
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
 
-    /*
-      Each slide is visible for ~4 s out of 12 s total.
-      Fade in over 0.5 s, hold, fade out over 0.5 s.
-      Percentages are relative to the 12 s duration.
-    */
-    @keyframes fade {
-      0%       { opacity: 0; }
-      4%       { opacity: 1; }   /* fully visible */
-      29%      { opacity: 1; }   /* hold */
-      33%      { opacity: 0; }   /* faded out, stay invisible for rest */
-      100%     { opacity: 0; }
-    }
+        .carousel-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-align: center;
+            white-space: nowrap;
+        }
 
-    /* ── SERVICE BLOCKS ── */
-    .block {
-      display: flex;
-      gap: 2rem;
-      align-items: flex-start;
-      margin-bottom: 3rem;
-    }
+        .carousel-caption h3 {
+            color: #fff;
+            margin: 0 0 0.2rem;
+            font-size: 1.4rem;
+        }
 
-    .block img.block-img {
-      width: 280px;
-      flex-shrink: 0;
-      border-radius: 4px;
-      object-fit: cover;
-    }
+        .carousel-caption p {
+            margin: 0;
+            font-size: 1rem;
+        }
 
-    .block-text {
-      flex: 1;
-    }
+        @keyframes fade {
+            0% {
+                opacity: 0;
+            }
+            4% {
+                opacity: 1;
+            }
+            29% {
+                opacity: 1;
+            }
+            33% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
 
-    .block-text h2:first-child {
-      margin-top: 0;
-    }
+        /* ── SERVICE BLOCKS ── */
+        .block {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            margin-bottom: 3rem;
+        }
 
-    /* ── CUSTOMER LOGOS ── */
-    .customer-section {
-      text-align: center;
-      margin-top: 2.5rem;
-    }
+        .block img.block-img {
+            width: 280px;
+            flex-shrink: 0;
+            border-radius: 4px;
+            object-fit: cover;
+        }
 
-    .customer-section h2 {
-      margin-bottom: 1.5rem;
-    }
+        .block-text {
+            flex: 1;
+        }
 
-    .logo-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem 2.5rem;
-    }
+        .block-text h2:first-child {
+            margin-top: 0;
+        }
 
-    .logo-grid img {
-      max-height: 60px;
-      max-width: 140px;
-      object-fit: contain;
-      filter: grayscale(30%);
-      transition: filter 0.2s;
-    }
+        /* ── CUSTOMER LOGOS ── */
+        .customer-section {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
 
-    .logo-grid img:hover {
-      filter: grayscale(0%);
-    }
+        .customer-section h2 {
+            margin-bottom: 1.5rem;
+        }
 
-    /* ── CONTACT ── */
-    .contact-grid {
-      display: flex;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
+        .logo-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem 2.5rem;
+        }
 
-    .contact-grid address {
-      font-style: normal;
-      line-height: 1.8;
-    }
+        .logo-grid img {
+            max-height: 60px;
+            max-width: 140px;
+            object-fit: contain;
+            filter: grayscale(30%);
+            transition: filter 0.2s;
+        }
 
-    .contact-grid address a {
-      color: #003366;
-    }
+        .logo-grid img:hover {
+            filter: grayscale(0%);
+        }
 
-    /* ── LEGAL SECTIONS (AGB / Datenschutz) ── */
-    .legal h3 {
-      font-size: 1rem;
-      font-weight: bold;
-      margin-top: 1rem;
-      margin-bottom: 0.3rem;
-    }
+        /* ── CONTACT ── */
+        .contact-grid {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
 
-    /* ── FOOTER ── */
-    footer {
-      background: #003366;
-      color: #ccc;
-      padding: 2rem;
-      margin-top: 4rem;
-    }
+        .contact-grid address {
+            font-style: normal;
+            line-height: 1.8;
+        }
 
-    footer h5 {
-      color: #fff;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
+        .contact-grid address a {
+            color: #003366;
+        }
 
-    footer p {
-      margin-bottom: 0.3rem;
-      font-size: 0.9rem;
-    }
+        /* ── FOOTER ── */
+        footer {
+            background: #003366;
+            color: #ccc;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
 
-    footer a {
-      color: #aad4ff;
-      text-decoration: none;
-    }
+        footer h5 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
+        footer p {
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
 
-    footer .footer-copy {
-      margin-top: 1rem;
-      font-size: 0.8rem;
-      border-top: 1px solid #335;
-      padding-top: 0.8rem;
-      text-align: center;
-    }
+        footer a {
+            color: #aad4ff;
+            text-decoration: none;
+        }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 700px) {
-      nav {
-        padding: 0.5rem 1rem;
-      }
+        footer a:hover {
+            text-decoration: underline;
+        }
 
-      .block {
-        flex-direction: column;
-      }
+        footer .footer-copy {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            border-top: 1px solid #335;
+            padding-top: 0.8rem;
+            text-align: center;
+        }
 
-      .block img.block-img {
-        width: 100%;
-        max-height: 220px;
-      }
+        /* ── RESPONSIVE ── */
+        @media (max-width: 700px) {
+            nav {
+                padding: 0.5rem 1rem;
+            }
 
-      .carousel {
-        height: 220px;
-      }
+            .block {
+                flex-direction: column;
+            }
 
+            .block img.block-img {
+                width: 100%;
+                max-height: 220px;
+            }
 
-      section {
-        padding: 2rem 1rem;
-      }
-    }
-  </style>
+            .carousel {
+                height: 220px;
+            }
+
+            section, main {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* ── OVERLAY PAGES (AGB / Datenschutz) ── */
+        .overlay-page {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            z-index: 200;
+            overflow-y: auto;
+        }
+
+        /* shown when URL hash matches the element id */
+        .overlay-page:target {
+            display: block;
+        }
+
+        .overlay-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .overlay-close {
+            display: block;
+            position: sticky;
+            top: 0;
+            background: #fff;
+            padding: 0.75rem 0;
+            margin-bottom: 1.5rem;
+            color: #003366;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            border-bottom: 1px solid #eee;
+            z-index: 201;
+        }
+
+        .overlay-close:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- ══════════════ NAVIGATION ══════════════ -->
-  <nav>
-    <a href="#home">
-      <img src="assets/logo/logo_dark_blue.png" alt="CASES GmbH Logo" class="logo">
-    </a>
+<!-- ══════════════ NAVIGATION ══════════════ -->
+<nav>
+    <a href="#home"><img src="assets/logo/logo.jpeg" alt="ASE Logo" class="logo"></a>
     <ul>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#leistungen">Leistungen</a></li>
-      <li><a href="#unternehmen">Unternehmen</a></li>
-      <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#leistungen">Leistungen</a></li>
+        <li><a href="#unternehmen">Unternehmen</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
     </ul>
-  </nav>
+</nav>
 
-  <!-- ══════════════ HERO CAROUSEL ══════════════ -->
-  <div class="carousel" id="home">
+<!-- ══════════════ HERO CAROUSEL ══════════════ -->
+<div class="carousel" id="home">
     <div class="carousel-inner">
-      <div class="carousel-item">
-        <img src="assets/carousel/robot.jpg" alt="Roboteranlage">
-        <div class="carousel-caption">
-          <h3>Willkommen</h3>
-          <p>bei der CASES GmbH</p>
+        <div class="carousel-item">
+            <img src="assets/carousel/robot.jpg" alt="Roboteranlage">
+            <div class="carousel-caption">
+                <h3>Willkommen</h3>
+                <p>bei der ASE</p>
+            </div>
         </div>
-      </div>
-      <div class="carousel-item">
-        <img src="assets/carousel/teil.jpg" alt="Elektronikteil">
-        <div class="carousel-caption">
-          <h3>CASES GmbH Elektroniksysteme</h3>
-          <p>Automatisierung ist unsere Profession</p>
+        <div class="carousel-item">
+            <img src="assets/carousel/teil.jpg" alt="Elektronikteil">
+            <div class="carousel-caption">
+                <h3>ASE Elektroniksysteme</h3>
+                <p>Automatisierung ist unsere Profession</p>
+            </div>
         </div>
-      </div>
-      <div class="carousel-item">
-        <img src="assets/carousel/presse.jpg" alt="Presse">
-        <div class="carousel-caption">
-          <h3>CASES GmbH Elektroniksysteme</h3>
-          <p>Automatisierung ist unsere Profession</p>
+        <div class="carousel-item">
+            <img src="assets/carousel/presse.jpg" alt="Presse">
+            <div class="carousel-caption">
+                <h3>ASE Elektroniksysteme</h3>
+                <p>Automatisierung ist unsere Profession</p>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <!-- ══════════════ HOME / WILLKOMMEN ══════════════ -->
-  <section>
-    <h1>Willkommen bei der CASES GmbH!</h1>
+<!-- ══════════════ HOME / WILLKOMMEN ══════════════ -->
+<section>
+    <h1>Willkommen bei der ASE!</h1>
     <p>Wir sind ein Unternehmen, das sich auf Projekte im industriellen Anlagenbau spezialisiert hat. Dabei können wir
-      folgende Leistungen anbieten:</p>
+        folgende Leistungen anbieten:</p>
     <ul>
-      <li>Planung, Projektierung und Dokumentation von elektrischen Anlagen und Maschinen</li>
-      <li>Hardwareplanung mit CAE-System, ePlan und TurboCAD</li>
-      <li>Programmierung der Automatisierungssysteme, Visualisierung</li>
-      <li>Projektierung, Aufbau und Programmierung von Robotersystemen</li>
-      <li>Projektierung von Mess- und Regeltechnik, Antriebstechnik</li>
-      <li>Modernisierung, Erweiterung und Optimierung vorhandener Anlagen</li>
-      <li>Mechanische und elektrische Inbetriebnahme</li>
-      <li>Ersteinweisung und Schulung</li>
-      <li>Kundendienst</li>
+        <li>Planung, Projektierung und Dokumentation von elektrischen Anlagen und Maschinen</li>
+        <li>Hardwareplanung mit CAE-System, ePlan und TurboCAD</li>
+        <li>Programmierung der Automatisierungssysteme, Visualisierung</li>
+        <li>Projektierung, Aufbau und Programmierung von Robotersystemen</li>
+        <li>Projektierung von Mess- und Regeltechnik, Antriebstechnik</li>
+        <li>Modernisierung, Erweiterung und Optimierung vorhandener Anlagen</li>
+        <li>Mechanische und elektrische Inbetriebnahme</li>
+        <li>Ersteinweisung und Schulung</li>
+        <li>Kundendienst</li>
     </ul>
     <p>Dabei sehen wir uns als Möglichkeit, in der arbeitsintensiven Zeit der Projektbetreuung und Inbetriebnahme zu
-      unterstützen bzw. selbst die Betreuung der Projekte zu übernehmen, insbesondere wenn Ihre Ingenieure zeitgleich
-      mehrere Projekte betreuen und Präsenz vor Ort erforderlich wird.</p>
+        unterstützen bzw. selbst die Betreuung der Projekte zu übernehmen, insbesondere wenn Ihre Ingenieure zeitgleich
+        mehrere Projekte betreuen und Präsenz vor Ort erforderlich wird.</p>
     <p>Unsere besondere Spezialisierung liegt in der Automatisierung mit den Simatic S7 klassisch mit Step7 oder TIA
-      Portal mit Profinetankopplung. Aber auch andere Bussysteme wie z.B. Profibus, MODBus, Devicenet, Interbus und
-      CANBus sind in von uns betreuten Projekten zum Einsatz gekommen.</p>
+        Portal mit Profinetankopplung. Aber auch andere Bussysteme wie z.B. Profibus, MODBus, Devicenet, Interbus und
+        CANBus sind in von uns betreuten Projekten zum Einsatz gekommen.</p>
     <p>Erfahrungen haben wir mit der Programmierung und Einbindung von KUKA Industrierobotern KRC32, KRC1 und KRC2
-      sowie KRC4 in den Automatisierungsprozess. Unsere Hauptauftraggeber sind Anlagenbauer und industrielle
-      Anlagenbetreiber im weltweiten Einsatz aus diversen Industriezweigen.</p>
+        sowie KRC4 in den Automatisierungsprozess. Unsere Hauptauftraggeber sind Anlagenbauer und industrielle
+        Anlagenbetreiber im weltweiten Einsatz aus diversen Industriezweigen.</p>
 
-    <div class="customer-section">
-      <h2>Unsere Kunden sind unsere beste Referenz.</h2>
-      <div class="logo-grid">
-        <img src="assets/customer_logos/bmw.png" alt="BMW">
-        <img src="assets/customer_logos/Voestalpine.png" alt="Voestalpine">
-        <img src="assets/customer_logos/SAS_Logo.svg" alt="SAS">
-        <img src="assets/customer_logos/diezel.png" alt="Diezel">
-        <img src="assets/customer_logos/elektronicon.jpg" alt="Elektronicon">
-        <img src="assets/customer_logos/futurpipe.png" alt="Futurpipe">
-        <img src="assets/customer_logos/logo_schuler.gif" alt="Schuler">
-        <img src="assets/customer_logos/mubea.png" alt="Mubea">
-        <img src="assets/customer_logos/novelis.png" alt="Novelis">
-        <img src="assets/customer_logos/pacik.gif" alt="Pacik">
-        <img src="assets/customer_logos/raab.jpg" alt="Raab">
-        <img src="assets/customer_logos/smt.jpg" alt="SMT">
-      </div>
-    </div>
-  </section>
+    <!--<div class="customer-section">
+        <h2>Unsere Kunden sind unsere beste Referenz.</h2>
+        <div class="logo-grid">
+            <img src="assets/customer_logos/bmw.png" alt="BMW">
+            <img src="assets/customer_logos/Voestalpine.png" alt="Voestalpine">
+            <img src="assets/customer_logos/SAS_Logo.svg" alt="SAS">
+            <img src="assets/customer_logos/diezel.png" alt="Diezel">
+            <img src="assets/customer_logos/elektronicon.jpg" alt="Elektronicon">
+            <img src="assets/customer_logos/futurpipe.png" alt="Futurpipe">
+            <img src="assets/customer_logos/logo_schuler.gif" alt="Schuler">
+            <img src="assets/customer_logos/mubea.png" alt="Mubea">
+            <img src="assets/customer_logos/novelis.png" alt="Novelis">
+            <img src="assets/customer_logos/pacik.gif" alt="Pacik">
+            <img src="assets/customer_logos/raab.jpg" alt="Raab">
+            <img src="assets/customer_logos/smt.jpg" alt="SMT">
+        </div>
+    </div>-->
+</section>
 
-  <!-- ══════════════ LEISTUNGEN ══════════════ -->
-  <section id="leistungen">
+<!-- ══════════════ LEISTUNGEN ══════════════ -->
+<section id="leistungen">
     <h1>Leistungen</h1>
 
     <div class="block">
-      <img src="assets/image_blocks/robot.jpg" alt="Roboter" class="block-img">
-      <div class="block-text">
-        <h2>Von der Idee zur fertigen Anlage.</h2>
-        <p>Wir betreuen die automatisierungstechnische Seite Ihres Projektes in all seinen Phasen.
-          Von der Entwicklung der Ideen über die Projektierung der Hard- und Software bis hin zum Aufbau und der
-          Inbetriebnahme beim Kunden. Eingeschlossen sind selbstverständlich alle erforderlichen Dokumentationen,
-          Betriebsanleitungen sowie Schulung/Unterweisung des Bedienpersonals.</p>
+        <img src="assets/image_blocks/robot.jpg" alt="Roboter" class="block-img">
+        <div class="block-text">
+            <h2>Von der Idee zur fertigen Anlage.</h2>
+            <p>Wir betreuen die automatisierungstechnische Seite Ihres Projektes in all seinen Phasen.
+                Von der Entwicklung der Ideen über die Projektierung der Hard- und Software bis hin zum Aufbau und der
+                Inbetriebnahme beim Kunden. Eingeschlossen sind selbstverständlich alle erforderlichen Dokumentationen,
+                Betriebsanleitungen sowie Schulung/Unterweisung des Bedienpersonals.</p>
 
-        <h2>Unser Wissen ist Ihr Vorteil.</h2>
-        <p>Wir haben Erfahrungen mit den verschiedensten Automatisierungs- und Antriebssystemen und deren
-          Projektierung, Programmierung und Inbetriebnahme. Zum Beispiel:</p>
-        <ul>
-          <li>Siemens TIA Portal Simatic STEP5/STEP7, Graph7, PCS7, ...</li>
-          <li>Siemens ProTool, WinCC, OPC</li>
-          <li>Profibus DP, CAN, ASI, Interbus, LWL</li>
-          <li>AllenBradley</li>
-          <li>AEG</li>
-          <li>SEW Eurodrive</li>
-          <li>Danfoss</li>
-        </ul>
-      </div>
+            <h2>Unser Wissen ist Ihr Vorteil.</h2>
+            <p>Wir haben Erfahrungen mit den verschiedensten Automatisierungs- und Antriebssystemen und deren
+                Projektierung, Programmierung und Inbetriebnahme. Zum Beispiel:</p>
+            <ul>
+                <li>Siemens TIA Portal Simatic STEP5/STEP7, Graph7, PCS7, ...</li>
+                <li>Siemens ProTool, WinCC, OPC</li>
+                <li>Profibus DP, CAN, ASI, Interbus, LWL</li>
+                <li>AllenBradley</li>
+                <li>AEG</li>
+                <li>SEW Eurodrive</li>
+                <li>Lenze</li>
+            </ul>
+        </div>
     </div>
 
     <div class="block">
-      <img src="assets/image_blocks/worker.jpg" alt="Mitarbeiter" class="block-img">
-      <div class="block-text">
-        <h2>Teil-Engineering.</h2>
-        <p>Sie benötigen für Teilabschnitte Ihres Projektes Unterstützung? Sie haben zeitliche Engpässe?
-          Wir unterstützen Sie gerne in den arbeitsintensiven Zeiten der Projektbearbeitung und Inbetriebnahme sowie
-          in der Betreuung Ihrer Anlagen in der Zeit nach der Inbetriebnahme. Dabei bieten wir Ihnen insbesondere
-          folgende Leistungen an:</p>
-        <ul>
-          <li>Planung, Projektierung und Dokumentation von elektrischen Anlagen und Maschinen</li>
-          <li>Hardwareplanung mit CAE-System</li>
-          <li>Programmierung der Automatisierungssysteme und Visualisierung</li>
-          <li>Projektierung der Mess- und Regeltechnik, Antriebstechnik</li>
-          <li>Mechanische und elektrische Inbetriebnahme beim Kunden</li>
-          <li>Einweisung und Schulung des Kunden</li>
-          <li>Kundendienst</li>
-        </ul>
+        <img src="assets/image_blocks/worker.jpg" alt="Mitarbeiter" class="block-img">
+        <div class="block-text">
+            <h2>Teil-Engineering.</h2>
+            <p>Sie benötigen für Teilabschnitte Ihres Projektes Unterstützung? Sie haben zeitliche Engpässe?
+                Wir unterstützen Sie gerne in den arbeitsintensiven Zeiten der Projektbearbeitung und Inbetriebnahme
+                sowie
+                in der Betreuung Ihrer Anlagen in der Zeit nach der Inbetriebnahme. Dabei bieten wir Ihnen insbesondere
+                folgende Leistungen an:</p>
+            <ul>
+                <li>Planung, Projektierung und Dokumentation von elektrischen Anlagen und Maschinen</li>
+                <li>Hardwareplanung mit CAE-System</li>
+                <li>Programmierung der Automatisierungssysteme und Visualisierung</li>
+                <li>Projektierung der Mess- und Regeltechnik, Antriebstechnik</li>
+                <li>Mechanische und elektrische Inbetriebnahme beim Kunden</li>
+                <li>Einweisung und Schulung des Kunden</li>
+                <li>Kundendienst</li>
+            </ul>
 
-        <h2>Immer up-to-date.</h2>
-        <p>Die Modernisierung älterer Anlagen birgt ein hohes Potential an Kosteneinsparungen, zum Beispiel durch:</p>
-        <ul>
-          <li>Höhere Qualität</li>
-          <li>Geringere Taktzeiten</li>
-          <li>Geringerer Wartungsaufwand</li>
-          <li>Preiswertere Ersatzteile</li>
-        </ul>
-        <p>Wir beraten Sie gerne über die Modernisierungsmöglichkeiten Ihrer Anlagen, unterstützen Sie bei diesen
-          Maßnahmen oder führen diese selbstständig durch.</p>
-      </div>
+            <h2>Immer up-to-date.</h2>
+            <p>Die Modernisierung älterer Anlagen birgt ein hohes Potential an Kosteneinsparungen, zum Beispiel
+                durch:</p>
+            <ul>
+                <li>Höhere Qualität</li>
+                <li>Geringere Taktzeiten</li>
+                <li>Geringerer Wartungsaufwand</li>
+                <li>Preiswertere Ersatzteile</li>
+            </ul>
+            <p>Wir beraten Sie gerne über die Modernisierungsmöglichkeiten Ihrer Anlagen, unterstützen Sie bei diesen
+                Maßnahmen oder führen diese selbstständig durch.</p>
+        </div>
     </div>
 
     <div class="block">
-      <img src="assets/image_blocks/electrics.png" alt="Elektrik" class="block-img">
-      <div class="block-text">
-        <h2>Ersatzteile</h2>
-        <p>Auch im Servicefall stehen wir Ihnen mit Rat und Tat zur Seite. Wir besorgen schnell und unkompliziert
-          alle nötigen Ersatzteile und führen die Reparatur aus. Um Ausfallzeiten minimieren zu können, stellen wir
-          Ihnen auch gerne für Ihre Anlage ein Ersatzteilpaket zusammen.</p>
+        <img src="assets/image_blocks/electrics.png" alt="Elektrik" class="block-img">
+        <div class="block-text">
+            <h2>Ersatzteile</h2>
+            <p>Auch im Servicefall stehen wir Ihnen mit Rat und Tat zur Seite. Wir besorgen schnell und unkompliziert
+                alle nötigen Ersatzteile und führen die Reparatur aus. Um Ausfallzeiten minimieren zu können, stellen
+                wir
+                Ihnen auch gerne für Ihre Anlage ein Ersatzteilpaket zusammen.</p>
 
-        <h2>Produktwechsel</h2>
-        <p>Sie wollen Ihr Produkt umstellen und müssen die Software und auch eventuell schnell anpassen? Auch hierbei
-          können Sie auf unsere Unterstützung zählen. Wir passen das Steuerungsprogramm den neuen benötigten
-          Funktionen und Bewegungsabläufen an und erweitern Ihre Anlage um die nötige mechanische und elektronische
-          Auslastung und erhöhen damit die Anlagenverfügbarkeit.</p>
-      </div>
+            <h2>Produktwechsel</h2>
+            <p>Sie wollen Ihr Produkt umstellen und müssen die Software und auch eventuell schnell anpassen? Auch
+                hierbei
+                können Sie auf unsere Unterstützung zählen. Wir passen das Steuerungsprogramm den neuen benötigten
+                Funktionen und Bewegungsabläufen an und erweitern Ihre Anlage um die nötige mechanische und
+                elektronische
+                Auslastung und erhöhen damit die Anlagenverfügbarkeit.</p>
+        </div>
     </div>
 
     <div class="block">
-      <img src="assets/image_blocks/construction.png" alt="Konstruktion" class="block-img">
-      <div class="block-text">
-        <h2>Simulation</h2>
-        <p>Bei der Installation einer Roboterzelle sind viele Dinge zu beachten. Wir unterstützen Sie bei der
-          Planung Ihres neuen Roboterarbeitsplatzes von der Idee über den Aufbau bis hin zur Inbetriebnahme.</p>
-        <p>Für die Planung stehen uns leistungsstarke grafische Simulationstools zur Verfügung. Wir planen und
-          optimieren mit Ihnen gemeinsam in diesen Tools Ihr zukünftiges Robotersystem. Sie können virtuell
-          miterleben, wie sich Ihr Roboter später bewegen wird.</p>
+        <img src="assets/image_blocks/construction.png" alt="Konstruktion" class="block-img">
+        <div class="block-text">
+            <h2>Simulation</h2>
+            <p>Bei der Installation einer Roboterzelle sind viele Dinge zu beachten. Wir unterstützen Sie bei der
+                Planung Ihres neuen Roboterarbeitsplatzes von der Idee über den Aufbau bis hin zur Inbetriebnahme.</p>
+            <p>Für die Planung stehen uns leistungsstarke grafische Simulationstools zur Verfügung. Wir planen und
+                optimieren mit Ihnen gemeinsam in diesen Tools Ihr zukünftiges Robotersystem. Sie können virtuell
+                miterleben, wie sich Ihr Roboter später bewegen wird.</p>
 
-        <h2>SPS – TIA Portal – CODESYS</h2>
-        <p>SPS Programmierung aktuell im TIA Portal aber auch im bewährten Step7 Umfeld; Programmierung im CODESYS
-          oder TWINCAT; Bewegungsprogrammierung für Echtzeitanwendungen.</p>
+            <h2>SPS – TIA Portal – CODESYS</h2>
+            <p>SPS Programmierung aktuell im TIA Portal aber auch im bewährten Step7 Umfeld; Programmierung im CODESYS
+                oder TWINCAT; Bewegungsprogrammierung für Echtzeitanwendungen.</p>
 
-        <h2>Maschinenbau</h2>
-        <p>Konstruktion und Aufbau von Sondermaschinen, Vorrichtungen und Anlagenteilen. Wir bieten:</p>
-        <ul>
-          <li>Automatisierung</li>
-          <li>Maschinenbau: Konstruktion mit TurboCAD</li>
-          <li>Softwareentwicklung</li>
-          <li>Elektrokonstruktion mit ePlan</li>
-        </ul>
-      </div>
+            <h2>Maschinenbau</h2>
+            <p>Konstruktion und Aufbau von Sondermaschinen, Vorrichtungen und Anlagenteilen. Wir bieten:</p>
+            <ul>
+                <li>Automatisierung</li>
+                <li>Maschinenbau: Konstruktion mit TurboCAD</li>
+                <li>Softwareentwicklung</li>
+                <li>Elektrokonstruktion mit ePlan</li>
+            </ul>
+        </div>
     </div>
 
     <p>Wir würden uns freuen, Sie bei Ihren Vorhaben in der Automatisierung beraten und unterstützen zu dürfen.
-      Dabei erarbeiten wir eine mit Ihnen abgestimmte, speziell auf Ihre betrieblichen Abläufe zugeschnittene
-      Soft- bzw. Hardwarelösung.</p>
-  </section>
+        Dabei erarbeiten wir eine mit Ihnen abgestimmte, speziell auf Ihre betrieblichen Abläufe zugeschnittene
+        Soft- bzw. Hardwarelösung.</p>
+</section>
 
-  <!-- ══════════════ UNTERNEHMEN ══════════════ -->
-  <section id="unternehmen">
+<!-- ══════════════ UNTERNEHMEN ══════════════ -->
+<section id="unternehmen">
     <h1>Über uns</h1>
-    <p>Wir sind die CASES GmbH – ein Unternehmen, das sich auf den industriellen Anlagenbau und die Automatisierungstechnik spezialisiert hat.
-      Mit langjähriger Erfahrung und einem breiten Know-how in der SPS-Programmierung, Robotiksystemen und der Elektroniksystemtechnik unterstützen wir
-      unsere Kunden von der Idee bis zur fertigen Anlage.</p>
-  </section>
+    <p>Wir sind die ASE – ein Unternehmen, das sich auf den industriellen Anlagenbau und die Automatisierungstechnik
+        spezialisiert hat.
+        Mit langjähriger Erfahrung und einem breiten Know-how in der SPS-Programmierung, Robotiksystemen und der
+        Elektroniksystemtechnik unterstützen wir
+        unsere Kunden von der Idee bis zur fertigen Anlage.</p>
+</section>
 
-  <!-- ══════════════ KONTAKT ══════════════ -->
-  <section id="kontakt">
-    <h1>Kontakt</h1>
-    <div class="contact-grid">
-      <address>
-        <strong>CASES GmbH</strong><br>
-        Lämmertriebe 13<br>
-        OT Breitenbach<br>
-        06722 Wetterzeube<br><br>
-        Telefon: <a href="tel:034425997748">034425 / 997748</a><br>
-        Telefax: 034425 / 997749<br>
-        E-Mail: <a href="mailto:info@cases-gmbh.de">info@cases-gmbh.de</a>
-      </address>
-    </div>
-  </section>
-
-  <!-- ══════════════ IMPRESSUM ══════════════ -->
-  <section id="impressum">
+<!-- ══════════════ IMPRESSUM ══════════════ -->
+<section id="impressum">
     <h1>Impressum</h1>
-    <h2>Angaben gemäß § 5 TMG</h2>
-    <p>Cases GmbH<br>
-      Lämmertriebe 13<br>
-      OT Breitenbach<br>
-      06722 Wetterzeube</p>
-    <p>Handelsregister: HRB17864<br>
-      Registergericht: AG Stendal</p>
-    <p><strong>Vertreten durch:</strong><br>
-      Carsten Andreas Schulz</p>
-
-    <h2>Kontakt</h2>
-    <p>Telefon: 034425 997748<br>
-      Telefax: 034425 997749<br>
-      E-Mail: <a href="mailto:info@cases-gmbh.de">info@cases-gmbh.de</a></p>
+    <h2 id="kontakt">Kontakt</h2>
+    <div class="contact-grid">
+        <address>
+            <strong>ASE Elektroniksysteme</strong><br>
+            Lämmertriebe 13<br>
+            OT Breitenbach<br>
+            06722 Wetterzeube<br><br>
+            E-Mail: <a href="mailto:info@ase-systeme.de">info@ase-systeme.de</a><br>
+            Telefon: <a href="tel:+4934425997748">+49 (0) 34425 / 99 77 48</a><br>
+            Telefax: +49 (0) 34425 / 99 77 49<br>
+        </address>
+    </div>
 
     <h2>Umsatzsteuer-ID</h2>
     <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
-      DE277268817</p>
+        119/272/05647</p>
+
+    <h2>Gesellschaftsform</h2>
+    <p>Einzelunternehmen</p>
+
+    <h2>Inhaber</h2>
+    <p>Andreas Schulz</p>
 
     <h2>Verbraucherstreitbeilegung / Universalschlichtungsstelle</h2>
     <p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle
-      teilzunehmen.</p>
+        teilzunehmen.</p>
 
     <h3>Haftung für Inhalte</h3>
     <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen
-      Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
-      übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf
-      eine rechtswidrige Tätigkeit hinweisen.</p>
+        Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet,
+        übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf
+        eine rechtswidrige Tätigkeit hinweisen.</p>
     <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen
-      bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer
-      konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese
-      Inhalte umgehend entfernen.</p>
+        bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer
+        konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese
+        Inhalte umgehend entfernen.</p>
 
     <h3>Haftung für Links</h3>
     <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
-      Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten
-      Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+        Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten
+        Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
 
     <h3>Urheberrecht</h3>
     <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
-      Urheberrecht. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch
-      gestattet.</p>
-  </section>
+        Urheberrecht. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch
+        gestattet.</p>
+</section>
 
-  <!-- ══════════════ FOOTER ══════════════ -->
-  <footer>
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer>
     <h5>Kontakt</h5>
     <p>Lämmertriebe 13 &nbsp;|&nbsp; 06722 Wetterzeube OT Breitenbach</p>
-    <p>Telefon: <a href="tel:034425997748">034425 / 997748</a> &nbsp;|&nbsp;
-       Telefax: 034425 / 997749 &nbsp;|&nbsp;
-       E-Mail: <a href="mailto:info@cases-gmbh.de">info@cases-gmbh.de</a></p>
+    <p>Telefon: <a href="tel:+4934425997748">+49 (0) 34425 / 99 77 48</a> &nbsp;|&nbsp;
+        Telefax: <a href="tel:+4934425997749">+49 (0) 34425 / 99 77 49</a> &nbsp;|&nbsp;
+        E-Mail: <a href="mailto:info@ase-systeme.de">info@ase-systeme.de</a></p>
     <div class="footer-copy">
-      <p>&copy; 2026 CASES GmbH. All rights reserved.
-        &nbsp;|&nbsp; <a href="#impressum">Impressum</a>
-        &nbsp;|&nbsp; <a href="#kontakt">Kontakt</a>
-      </p>
+        <p>&copy; 2026 ASE Elektroniksysteme. All rights reserved.
+            &nbsp;|&nbsp; <a href="#impressum">Impressum &amp; Kontakt</a>
+            &nbsp;|&nbsp; <a href="#agb">AGB</a>
+            &nbsp;|&nbsp; <a href="#datenschutz">Datenschutzerklärung</a>
+        </p>
     </div>
-  </footer>
+</footer>
+
+<!-- ══════════════ AGB (hidden until #agb) ══════════════ -->
+<div id="agb" class="overlay-page">
+    <div class="overlay-content">
+        <a href="#" class="overlay-close">&times; Schließen</a>
+        <h1>Allgemeine Geschäftsbedingungen</h1>
+        <h2> Allgemeine Bestimmungen</h2>
+        <p>1.1. Für den Umfang der Lieferungen oder Leistungen (im Folgenden: Lieferungen) sind
+            die beiderseitigen schriftlichen Erklärungen maßgebend. Allgemeine Geschäftsbedingungen des Bestellers
+            gelten jedoch nur insoweit, als der Lieferant oder Leistende (im Folgenden: Lieferant) ihnen ausdrücklich
+            schriftlich zugestimmt hat.<br> 1.2. An Kostenvoranschlägen, Zeichnungen und anderen
+            Unterlagen (im Folgenden: Unterlagen) behält sich der Lieferant seine eigentums- und urheberrechtlichen
+            Verwertungsrechte uneingeschränkt vor. Die Unterlagen dürfen nur nach vorheriger Zustimmung des Lieferanten
+            Dritten zugänglich gemacht werden und sind, wenn der Auftrag dem Lieferanten nicht erteilt wird, diesem auf
+            Verlangen unverzüglich zurückzugeben. Die Sätze 1 und 2 gelten entsprechend für Unterlagen des Bestellers;
+            diese dürfen jedoch solchen Dritten zugänglich gemacht werden, denen der Lieferant zulässigerweise
+            Lieferungen übertragen hat.<br> 1.3. An Software hat der Besteller das nicht
+            ausschließliche Recht zur Nutzung mit den vereinbarten Leistungsmerkmalen in unveränderter Form auf den
+            vereinbarten Geräten. Der Besteller darf ohne ausdrückliche Vereinbarung eine Sicherungskopie erstellen.<br
+            > 1.4. Teillieferungen sind zulässig, soweit sie dem Besteller zumutbar sind.
+        </p>
+        <h2> Preise und Zahlungsbedingungen</h2>
+        <p>2.1. Die Preise verstehen sich ab Werk zuzüglich der jeweils geltenden gesetzlichen
+            Umsatzsteuer.<br> 2.2. Hat der Lieferant die Aufstellung oder Montage übernommen und
+            ist nicht etwas anderes vereinbart, so trägt der Besteller neben der vereinbarten Vergütung alle
+            erforderlichen Nebenkosten wie Reisekosten, Kosten für den Transport des Handwerkszeugs und des persönlichen
+            Gepäcks sowie Auslösungen.<br> 2.3. Zahlungen sind frei Zahlstelle des Lieferanten zu
+            leisten.<br> 2.4. Der Besteller kann nur mit solchen Forderungen aufrechnen, die
+            unbestritten oder rechtskräftig festgestellt sind.</p>
+        <h2> Eigentumsvorbehalt</h2>
+        <p>3.1. Die Gegenstände der Lieferungen (Vorbehaltsware) bleiben Eigentum des Lieferanten
+            bis zur Erfüllung sämtlicher ihm gegen den Besteller aus der Geschäftsverbindung zustehenden Ansprüche.
+            Soweit der Wert aller Sicherungsrechte, die dem Lieferanten zustehen, die Höhe aller gesicherten Ansprüche
+            um mehr als 20% übersteigt, wird der Lieferant auf Wunsch des Bestellers einen entsprechenden Teil der
+            Sicherungsrechte freigeben.<br> 3.2. Während des Bestehens des Eigentumsvorbehalts ist
+            dem Besteller eine Verpfändung oder Sicherungsübereignung untersagt und die Weiterveräußerung nur
+            Wiederverkäufern im gewöhnlichen Geschäftsgang und nur unter der Bedingung gestattet, dass der
+            Wiederverkäufer von seinem Kunden Bezahlung erhält oder den Vorbehalt macht, dass das Eigentum auf den
+            Kunden erst übergeht, wenn dieser seine Zahlungsverpflichtungen erfüllt hat.<br> 3.3.
+            Bei Pfändungen, Beschlagnahmen oder sonstigen Verfügungen oder Eingriffen Dritter hat der Besteller den
+            Lieferanten unverzüglich zu benachrichtigen.<br> 3.4. Bei Pflichtverletzungen des
+            Bestellers, insbesondere bei Zahlungsverzug, ist der Lieferant nach erfolglosem Ablauf einer dem Besteller
+            gesetzten angemessenen Frist zur Leistung zum Rücktritt und zur Rücknahme berechtigt; die gesetzlichen
+            Bestimmungen über die Entbehrlichkeit einer Fristsetzung bleiben unberührt. Der Besteller ist zur Herausgabe
+            verpflichtet.</p>
+        <h2> Fristen für Lieferungen, Verzug</h2>
+        <p>4.1. Die Einhaltung von Fristen für Lieferungen setzt den rechtzeitigen Eingang
+            sämtlicher vom Besteller zu liefernden Unterlagen, erforderlichen Genehmigungen und Freigaben, insbesondere
+            von Plänen, sowie die Einhaltung der vereinbarten Zahlungsbedingungen und sonstigen Verpflichtungen durch
+            den Besteller voraus. Werden diese Voraussetzungen nicht rechtzeitig erfüllt, so verlängern sich die Fristen
+            angemessen; dies gilt nicht, wenn der Lieferant die Verzögerung zu vertreten hat.<br>
+            4.2. Ist die Nichteinhaltung der Fristen auf höhere Gewalt, z. B. Mobilmachung, Krieg, Aufruhr, oder auf
+            ähnliche Ereignisse, z. B. Streik, Aussperrung, zurückzuführen, verlängern sich die Fristen angemessen.<br
+            > 4.3. Kommt der Lieferant in Verzug, kann der Besteller - sofern er glaubhaft
+            macht, dass ihm hieraus ein Schaden entstanden ist - eine Entschädigung für jede vollendete Woche des
+            Verzuges von je 0,3%, insgesamt jedoch höchstens 3% des Preises für den Teil der Lieferungen verlangen, der
+            wegen des Verzuges nicht in zweckdienlichen Betrieb genommen werden konnte.<br> 4.4.
+            Sowohl Schadensersatzansprüche des Bestellers wegen Verzögerung der Lieferung als auch
+            Schadensersatzansprüche statt der Leistung, die über die in Art.4 Nr.3 genannten Grenzen hinausgehen, sind
+            in allen Fällen verzögerter Lieferung, auch nach Ablauf einer dem Lieferanten etwa gesetzten Frist zur
+            Lieferung, ausgeschlossen. Dies gilt nicht, soweit in Fällen des Vorsatzes, der groben Fahrlässigkeit oder
+            wegen der Verletzung des Lebens, des Körpers oder der Gesundheit zwingend gehaftet wird. Vom Vertrag kann
+            der Besteller im Rahmen der gesetzlichen Bestimmungen nur zurücktreten, soweit die Verzögerung der Lieferung
+            vom Lieferanten zu vertreten ist. Eine Änderung der Beweislast zum Nachteil des Bestellers ist mit den
+            vorstehenden Regelungen nicht verbunden.<br> 4.5. Der Besteller ist verpflichtet, auf
+            Verlangen des Lieferanten innerhalb einer angemessenen Frist zu erklären, ob er wegen der Verzögerung der
+            Lieferung vom Vertrag zurücktritt oder auf der Lieferung besteht.<br> 4.6. Werden
+            Versand oder Zustellung auf Wunsch des Bestellers um mehr als einen Monat nach Anzeige der
+            Versandbereitschaft verzögert, kann dem Besteller für jeden angefangenen Monat Lagergeld in Höhe von 0,5%
+            des Preises der Gegenstände der Lieferungen, höchstens jedoch insgesamt 5%, berechnet werden. Der Nachweis
+            höherer oder niedrigerer Lagerkosten bleibt den Vertragsparteien unbenommen.</p>
+        <h2> Gefahrübergang</h2>
+        <p>5.1. Die Gefahr geht auch bei frachtfreier Lieferung wie folgt auf den Besteller
+            über:<br> 5.1.1. Bei Lieferungen ohne Aufstellung oder Montage, wenn sie zum Versand
+            gebracht oder abgeholt worden sind. Auf Wunsch und Kosten des Bestellers werden Lieferungen vom Lieferanten
+            gegen die üblichen Transportrisiken versichert.<br> 5.1.2. Bei Lieferungen mit
+            Aufstellung oder Montage am Tage der Übernahme in eigenen Betrieb oder, soweit vereinbart, nach
+            einwandfreiem Probebetrieb.<br> 5.2. Wenn der Versand, die Zustellung, der Beginn, die
+            Durchführung der Aufstellung oder Montage, die Übernahme in eigenen Betrieb oder der Probebetrieb aus vom
+            Besteller zu vertretenden Gründen verzögert wird oder der Besteller aus sonstigen Gründen in Annahmeverzug
+            kommt, so geht die Gefahr auf den Besteller über.</p>
+        <h2> Aufstellung und Montage</h2>
+        <p>6.1. Für die Aufstellung und Montage gelten, soweit nichts anderes schriftlich
+            vereinbart ist, folgende Bestimmungen. Der Besteller hat auf seine Kosten zu übernehmen und rechtzeitig zu
+            stellen:<br> 6.1.1. Alle Erd-, Bau- und sonstigen branchenfremden Nebenarbeiten
+            einschließlich der dazu benötigten Fach- und Hilfskräfte, Baustoffe und Werkzeuge.<br>
+            6.1.2. Die zur Montage und Inbetriebsetzung erforderlichen Bedarfsgegenstände und -stoffe, wie Gerüste,
+            Hebezeuge und andere Vorrichtungen, Brennstoffe und Schmiermittel.<br> 6.1.3. Energie
+            und Wasser an der Verwendungsstelle einschließlich der Anschlüsse, Heizung und Beleuchtung.<br
+            > 6.1.4. Bei der Montagestelle für die Aufbewahrung der Maschinenteile,
+            Apparaturen, Materialien, Werkzeuge usw. genügend große, geeignete, trockene und verschließbare Räume und
+            für das Montagepersonal angemessene Arbeits- und Aufenthaltsräume einschließlich den Umständen angemessener
+            sanitärer Anlagen; im Übrigen hat der Besteller zum Schutz des Besitzes des Lieferanten und des
+            Montagepersonals auf der Baustelle die Maßnahmen zu treffen, die er zum Schutz des eigenen Besitzes
+            ergreifen würde.<br> 6.1.5. Schutzkleidung und Schutzvorrichtungen, die infolge
+            besonderer Umstände der Montagestelle erforderlich sind.<br> 6.2. Vor Beginn der
+            Montagearbeiten hat der Besteller die nötigen Angaben über die Lage verdeckt geführter Strom-, Gas-,
+            Wasserleitungen oder ähnlicher Anlagen sowie die erforderlichen statischen Angaben unaufgefordert zur
+            Verfügung zu stellen.<br> 6.3. Vor Beginn der Aufstellung oder Montage müssen sich die
+            für die Aufnahme der Arbeiten erforderlichen Beistellungen und Gegenstände an der Aufstellungs- oder
+            Montagestelle befinden und alle Vorarbeiten vor Beginn des Aufbaues so weit fortgeschritten sein, dass die
+            Aufstellung oder Montage vereinbarungsgemäß begonnen und ohne Unterbrechung durchgeführt werden kann.
+            Anfuhrwege und der Aufstellungs- oder Montageplatz müssen geebnet und geräumt sein.<br
+            > 6.4. Verzögern sich die Aufstellung, Montage oder Inbetriebnahme durch nicht
+            vom Lieferanten zu vertretende Umstände, so hat der Besteller in angemessenem Umfang die Kosten für
+            Wartezeit und zusätzlich erforderliche Reisen des Lieferanten oder des Montagepersonals zu tragen.<br
+            > 6.5. Der Besteller hat dem Lieferanten wöchentlich die Dauer der Arbeitszeit
+            des Montagepersonals sowie die Beendigung der Aufstellung, Montage oder Inbetriebnahme unverzüglich zu
+            bescheinigen.<br> 6.6. Verlangt der Lieferant nach Fertigstellung die Abnahme der
+            Lieferung, so hat sie der Besteller innerhalb von zwei Wochen vorzunehmen. Geschieht dies nicht, so gilt die
+            Abnahme als erfolgt. Die Abnahme gilt gleichfalls als erfolgt, wenn die Lieferung - gegebenenfalls nach
+            Abschluss einer vereinbarten Testphase - in Gebrauch genommen worden ist.</p>
+        <h2> Entgegennahme</h2>
+        <p>Der Besteller darf die Entgegennahme von Lieferungen wegen geringfügiger Mängel nicht
+            verweigern.</p>
+        <h2> Sachmängel</h2>
+        <p>Für Sachmängel haftet der Lieferant wie folgt:<br> 8.1. Alle
+            diejenigen Teile oder Leistungen sind nach Wahl des Lieferanten unentgeltlich nachzubessern, neu zu liefern
+            oder neu zu erbringen, die innerhalb der Verjährungsfrist, ohne Rücksicht auf die Betriebsdauer, einen
+            Sachmangel aufweisen, sofern dessen Ursache bereits im Zeitpunkt des Gefahrübergangs vorlag.<br
+            > 8.2. Sachmängelansprüche verjähren in 12 Monaten. Dies gilt nicht bei einer
+            vorsätzlichen oder grob fahrlässigen Pflichtverletzung des Lieferanten und bei arglistigem Verschweigen
+            eines Mangels. Die gesetzlichen Regelungen über Ablaufhemmung, Hemmung und Neubeginn der Fristen bleiben
+            unberührt.<br> 8.3. Der Besteller hat Sachmängel gegenüber dem Lieferanten
+            unverzüglich schriftlich zu rügen.<br> 8.4. Bei Mängelrügen dürfen Zahlungen des
+            Bestellers in einem Umfang zurückgehalten werden, die in einem angemessenen Verhältnis zu den aufgetretenen
+            Sachmängeln stehen. Der Besteller kann Zahlungen nur zurückhalten, wenn eine Mängelrüge geltend gemacht
+            wird, über deren Berechtigung kein Zweifel bestehen kann. Erfolgte die Mängelrüge zu Unrecht, ist der
+            Lieferant berechtigt, die ihm entstandenen Aufwendungen vom Besteller ersetzt zu verlangen.<br
+            > 8.5. Zunächst ist dem Lieferanten Gelegenheit zur Nacherfüllung innerhalb
+            angemessener Frist zu gewähren.<br> 8.6. Schlägt die Nacherfüllung fehl, kann der
+            Besteller unbeschadet etwaiger Schadensersatzansprüche gemäß Art.11 vom Vertrag zurücktreten oder die
+            Vergütung mindern.<br> 8.7. Mängelansprüche bestehen nicht bei nur unerheblicher
+            Abweichung von der vereinbarten Beschaffenheit, bei nur unerheblicher Beeinträchtigung der Brauchbarkeit,
+            bei natürlicher Abnutzung oder Schäden, die nach dem Gefahrübergang infolge fehlerhafter oder nachlässiger
+            Behandlung, übermäßiger Beanspruchung, ungeeigneter Betriebsmittel, mangelhafter Bauarbeiten, ungeeigneten
+            Baugrundes oder die aufgrund besonderer äußerer Einflüsse entstehen, die nach dem Vertrag nicht
+            vorausgesetzt sind, sowie bei nicht reproduzierbaren Softwarefehlern. Werden vom Besteller oder von Dritten
+            unsachgemäß Änderungen oder Instandsetzungsarbeiten vorgenommen, so bestehen für diese und die daraus
+            entstehenden Folgen ebenfalls keine Mängelansprüche.<br> 8.8. Ansprüche des Bestellers
+            wegen der zum Zweck der Nacherfüllung erforderlichen Aufwendungen, insbesondere Transport-, Wege-, Arbeits-
+            und Materialkosten, sind ausgeschlossen, soweit die Aufwendungen sich erhöhen, weil der Gegenstand der
+            Lieferung nachträglich an einen anderen Ort als die Niederlassung des Bestellers verbracht worden ist, es
+            sei denn, die Verbringung entspricht seinem bestimmungsgemäßen Gebrauch.<br> 8.9.
+            Rückgriffsansprüche des Bestellers gegen den Lieferanten gemäß § 478 BGB (Rückgriff des Unternehmers)
+            bestehen nur insoweit, als der Besteller mit seinem Abnehmer keine über die gesetzlichen Mängelansprüche
+            hinausgehenden Vereinbarungen getroffen hat. Für den Umfang des Rückgriffsanspruchs des Bestellers gegen den
+            Lieferanten gemäß § 478 Abs. 2 BGB gilt ferner Art.8 Nr.8 entsprechend.<br> 8.10. Für
+            Schadensersatzansprüche gilt im Übrigen Art.11. Weitergehende oder andere als die in diesem Art.8 geregelten
+            Ansprüche des Bestellers gegen den Lieferanten und dessen Erfüllungsgehilfen wegen eines Sachmangels sind
+            ausgeschlossen.</p>
+        <h2> Gewerbliche Schutzrechte und Urheberrechte, Rechtsmängel</h2>
+        <p>9.1. Sofern nicht anders vereinbart, ist der Lieferant verpflichtet, die Lieferung
+            lediglich im Land des Lieferorts frei von gewerblichen Schutzrechten und Urheberrechten Dritter (im
+            Folgenden: Schutzrechte) zu erbringen. Sofern ein Dritter wegen der Verletzung von Schutzrechten durch vom
+            Lieferanten erbrachte, vertragsgemäß genutzte Lieferungen gegen den Besteller berechtigte Ansprüche erhebt,
+            haftet der Lieferant gegenüber dem Besteller innerhalb der in Art.8 Nr.2 bestimmten Frist wie folgt:<br
+            > 9.1.1. Der Lieferant wird nach seiner Wahl und auf seine Kosten für die
+            betreffenden Lieferungen entweder ein Nutzungsrecht erwirken, sie so ändern, dass das Schutzrecht nicht
+            verletzt wird, oder austauschen. Ist dies dem Lieferanten nicht zu angemessenen Bedingungen möglich, stehen
+            dem Besteller die gesetzlichen Rücktritts- oder Minderungsrechte zu.<br> 9.1.2. Die
+            Pflicht des Lieferanten zur Leistung von Schadensersatz richtet sich nach Art.11.<br>
+            9.1.3. Die vorstehend genannten Verpflichtungen des Lieferanten bestehen nur, soweit der Besteller den
+            Lieferant über die vom Dritten geltend gemachten Ansprüche unverzüglich schriftlich verständigt, eine
+            Verletzung nicht anerkennt und dem Lieferant alle Abwehrmaßnahmen und Vergleichsverhandlungen vorbehalten
+            bleiben. Stellt der Besteller die Nutzung der Lieferung aus Schadensminderungs- oder sonstigen wichtigen
+            Gründen ein, ist er verpflichtet, den Dritten darauf hinzuweisen, dass mit der Nutzungseinstellung kein
+            Anerkenntnis einer Schutzrechtsverletzung verbunden ist.<br> 9.2. Ansprüche des
+            Bestellers sind ausgeschlossen, soweit er die Schutzrechtsverletzung zu vertreten hat.<br
+            > 9.3. Ansprüche des Bestellers sind ferner ausgeschlossen, soweit die
+            Schutzrechtsverletzung durch spezielle Vorgaben des Bestellers, durch eine vom Lieferant nicht voraussehbare
+            Anwendung oder dadurch verursacht wird, dass die Lieferung vom Besteller verändert oder zusammen mit nicht
+            vom Lieferant gelieferten Produkten eingesetzt wird.<br> 9.4. Im Falle von
+            Schutzrechtsverletzungen gelten für die in Art.9 Nr.1 geregelten Ansprüche des Bestellers im Übrigen die
+            Bestimmungen des Art.8 Nr.4, 5 und 9 entsprechend.<br> 9.5. Bei Vorliegen sonstiger
+            Rechtsmängel gelten die Bestimmungen des Art.8 entsprechend.<br> 9.6. Weitergehende
+            oder andere als die in diesem Art.9 geregelten Ansprüche des Bestellers gegen den Lieferanten und dessen
+            Erfüllungsgehilfen wegen eines Rechtsmangels sind ausgeschlossen.</p>
+        <h2> Unmöglichkeit, Vertragsanpassung</h2>
+        <p>10.1. Soweit die Lieferung unmöglich ist, ist der Besteller berechtigt, Schadensersatz
+            zu verlangen, es sei denn, dass der Lieferant die Unmöglichkeit nicht zu vertreten hat. Jedoch beschränkt
+            sich der Schadensersatzanspruch des Bestellers auf 10% des Wertes desjenigen Teils der Lieferung, der wegen
+            der Unmöglichkeit nicht in zweckdienlichen Betrieb genommen werden kann. Diese Beschränkung gilt nicht,
+            soweit in Fällen des Vorsatzes, der groben Fahrlässigkeit oder wegen der Verletzung des Lebens, des Körpers
+            oder der Gesundheit zwingend gehaftet wird; eine Änderung der Beweislast zum Nachteil des Bestellers ist
+            hiermit nicht verbunden. Das Recht des Bestellers zum Rücktritt vom Vertrag bleibt unberührt.<br
+            > 10.2. Sofern unvorhersehbare Ereignisse im Sinne von Art.4 Nr.2 die
+            wirtschaftliche Bedeutung oder den Inhalt der Lieferung erheblich verändern oder auf den Betrieb des
+            Lieferanten erheblich einwirken, wird der Vertrag unter Beachtung von Treu und Glauben angemessen angepasst.
+            Soweit dies wirtschaftlich nicht vertretbar ist, steht dem Lieferant das Recht zu, vom Vertrag
+            zurückzutreten. Will er von diesem Rücktrittsrecht Gebrauch machen, so hat er dies nach Erkenntnis der
+            Tragweite des Ereignisses unverzüglich dem Besteller mitzuteilen und zwar auch dann, wenn zunächst mit dem
+            Besteller eine Verlängerung der Lieferzeit vereinbart war.</p>
+        <h2> Sonstige Schadensersatzansprüche</h2>
+        <p>11.1. Schadens- und Aufwendungsersatzansprüche des Bestellers (im Folgenden:
+            Schadensersatzansprüche), gleich aus welchem Rechtsgrund, insbesondere wegen Verletzung von Pflichten aus
+            dem Schuldverhältnis und aus unerlaubter Handlung, sind ausgeschlossen.<br> 11.2. Dies
+            gilt nicht, soweit zwingend gehaftet wird, z. B. nach dem Produkthaftungsgesetz, in Fällen des Vorsatzes,
+            der groben Fahrlässigkeit, wegen der Verletzung des Lebens, des Körpers oder der Gesundheit, wegen der
+            Verletzung wesentlicher Vertragspflichten. Der Schadensersatzanspruch für die Verletzung wesentlicher
+            Vertragspflichten ist jedoch auf den vertragstypischen, vorhersehbaren Schaden begrenzt, soweit nicht
+            Vorsatz oder grobe Fahrlässigkeit vorliegt oder wegen der Verletzung des Lebens, des Körpers oder der
+            Gesundheit gehaftet wird. Eine Änderung der Beweislast zum Nachteil des Bestellers ist mit den vorstehenden
+            Regelungen nicht verbunden.<br> 11.3. Soweit dem Besteller nach diesem Art.11
+            Schadensersatzansprüche zustehen, verjähren diese mit Ablauf der für Sachmängelansprüche geltenden
+            Verjährungsfrist gemäß Art.8 Nr.2. Bei Schadensersatzansprüchen nach dem Produkthaftungsgesetz gelten die
+            gesetzlichen Verjährungsvorschriften.</p>
+        <h2> Gerichtsstand und anwendbares Recht</h2>
+        <p>12.1. Alleiniger Gerichtsstand ist bei allen aus dem Vertragsverhältnis unmittelbar
+            oder mittelbar sich ergebenden Streitigkeiten der Sitz des Lieferanten. Der Lieferant ist jedoch auch
+            berechtigt, am Sitz des Bestellers zu klagen.<br> 12.2. Für die Rechtsbeziehungen im
+            Zusammenhang mit diesem Vertrag gilt deutsches materielles Recht unter Ausschluss des Übereinkommens der
+            Vereinten Nationen über Verträge über den internationalen Warenkauf (CISG).</p>
+        <h2> Verbindlichkeit des Vertrages</h2>
+        <p>Der Vertrag bleibt auch bei rechtlicher Unwirksamkeit einzelner Bestimmungen in seinen
+            übrigen Teilen verbindlich. Das gilt nicht, wenn das Festhalten an dem Vertrag eine unzumutbare Härte für
+            eine Partei darstellen würde.<br> Stand : 01.04.2003<br> Update
+            : 08.11.2004<br><br><br> Wir weisen darauf
+            hin, dass die vorgenannten AGB durch folgende Bedingungen ergänzt werden:</p>
+        <p><strong>Preise:</strong></p>
+        <p>Alle Preise sind freibleibend, beziehen sich auf die angegebene Preiseinheit und gelten
+            ausschließlich Verpackung. Alle Preise gelten ab Werk, ohne Umsatzsteuer.</p>
+        <p><strong>Verpackung:</strong></p>
+        <p>Die Verpackung wird zum Selbstkostenpreis berechnet, jedoch nicht zurückgenommen.</p>
+        <p><strong>Anbruch:</strong></p>
+        <p>Zuschläge beim Anbruch von Verpackungseinheiten behalten wir uns vor.</p>
+        <p><strong>Abbildungen und Beschreibungen:</strong></p>
+        <p>Die in den jeweiligen Unterlagen angegebenen Abbildungen, Abmessungen, Beschreibungen,
+            technische Details sowie Verpackungseinheiten sind nicht verbindlich, der Lieferant behält sich ausdrücklich
+            Änderungen vor.</p>
+    </div>
+</div>
+
+<!-- ══════════════ DATENSCHUTZ (hidden until #datenschutz) ══════════════ -->
+<div id="datenschutz" class="overlay-page">
+    <div class="overlay-content">
+        <a href="#" class="overlay-close">&times; Schließen</a>
+        <h1>Datenschutzerklärung</h1>
+        <h2>1. Datenschutz auf einen Blick</h2>
+        <h3>Allgemeine Hinweise</h3>
+        <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren
+            personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten,
+            mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz
+            entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.</p>
+        <h3>Datenerfassung auf dieser Website</h3>
+        <p><strong>Wer ist verantwortlich für die Datenerfassung auf dieser
+            Website?</strong></p>
+        <p>Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen
+            Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
+        <p><strong>Wie erfassen wir Ihre Daten?</strong></p>
+        <p>Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese mitteilen. Hierbei kann
+            es sich z.&nbsp;B. um Daten handeln, die Sie in ein Kontaktformular eingeben.</p>
+        <p>Andere Daten werden automatisch oder nach Ihrer Einwilligung beim Besuch der Website
+            durch unsere IT-Systeme erfasst. Das sind vor allem technische Daten (z.&nbsp;B. Internetbrowser,
+            Betriebssystem oder Uhrzeit des Seitenaufrufs). Die Erfassung dieser Daten erfolgt automatisch, sobald Sie
+            diese Website betreten.</p>
+        <p><strong>Wofür nutzen wir Ihre Daten?</strong></p>
+        <p>Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu
+            gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.</p>
+        <p><strong>Welche Rechte haben Sie bezüglich Ihrer Daten?</strong>
+        </p>
+        <p>Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und
+            Zweck Ihrer gespeicherten personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die
+            Berichtigung oder Löschung dieser Daten zu verlangen. Wenn Sie eine Einwilligung zur Datenverarbeitung
+            erteilt haben, können Sie diese Einwilligung jederzeit für die Zukunft widerrufen. Außerdem haben Sie das
+            Recht, unter bestimmten Umständen die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu
+            verlangen. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu.</p>
+        <p>Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit unter
+            der im Impressum angegebenen Adresse an uns wenden.</p>
+        <h2>2. Allgemeine Hinweise und Pflichtinformationen</h2>
+        <h3>Datenschutz</h3>
+        <p>Die Betreiber dieser Seiten nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir
+            behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften
+            sowie dieser Datenschutzerklärung.</p>
+        <p>Wenn Sie diese Website benutzen, werden verschiedene personenbezogene Daten erhoben.
+            Personenbezogene Daten sind Daten, mit denen Sie persönlich identifiziert werden können. Die vorliegende
+            Datenschutzerklärung erläutert, welche Daten wir erheben und wofür wir sie nutzen. Sie erläutert auch, wie
+            und zu welchem Zweck das geschieht.</p>
+        <p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.&nbsp;B. bei der
+            Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff
+            durch Dritte ist nicht möglich.</p>
+        <h3>Hinweis zur verantwortlichen Stelle</h3>
+        <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
+        <p>Carsten Andreas Schulz<br> ASE<br></p>
+        <p>Weitere Kontaktinformationen siehe <a href="#impressum">Kontakt</a>.</p>
+        <p>Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder
+            gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.&nbsp;B.
+            Namen, E-Mail-Adressen o. Ä.) entscheidet.</p>
+        <h3>Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>
+        <p>Viele Datenverarbeitungsvorgänge sind nur mit Ihrer ausdrücklichen Einwilligung
+            möglich. Sie können eine bereits erteilte Einwilligung jederzeit widerrufen. Dazu reicht eine formlose
+            Mitteilung per E-Mail an uns. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom
+            Widerruf unberührt.</p>
+        <h3>Widerspruchsrecht gegen die Datenerhebung in besonderen Fällen sowie gegen
+            Direktwerbung (Art. 21 DSGVO)</h3>
+        <p>WENN DIE DATENVERARBEITUNG AUF GRUNDLAGE VON ART. 6 ABS. 1 LIT. E ODER F DSGVO ERFOLGT,
+            HABEN SIE JEDERZEIT DAS RECHT, AUS GRÜNDEN, DIE SICH AUS IHRER BESONDEREN SITUATION ERGEBEN, GEGEN DIE
+            VERARBEITUNG IHRER PERSONENBEZOGENEN DATEN WIDERSPRUCH EINZULEGEN; DIES GILT AUCH FÜR EIN AUF DIESE
+            BESTIMMUNGEN GESTÜTZTES PROFILING. DIE JEWEILIGE RECHTSGRUNDLAGE, AUF DENEN EINE VERARBEITUNG BERUHT,
+            ENTNEHMEN SIE DIESER DATENSCHUTZERKLÄRUNG. WENN SIE WIDERSPRUCH EINLEGEN, WERDEN WIR IHRE BETROFFENEN
+            PERSONENBEZOGENEN DATEN NICHT MEHR VERARBEITEN, ES SEI DENN, WIR KÖNNEN ZWINGENDE SCHUTZWÜRDIGE GRÜNDE FÜR
+            DIE VERARBEITUNG NACHWEISEN, DIE IHRE INTERESSEN, RECHTE UND FREIHEITEN ÜBERWIEGEN ODER DIE VERARBEITUNG
+            DIENT DER GELTENDMACHUNG, AUSÜBUNG ODER VERTEIDIGUNG VON RECHTSANSPRÜCHEN (WIDERSPRUCH NACH ART. 21 ABS. 1
+            DSGVO).</p>
+        <p>WERDEN IHRE PERSONENBEZOGENEN DATEN VERARBEITET, UM DIREKTWERBUNG ZU BETREIBEN, SO
+            HABEN SIE DAS RECHT, JEDERZEIT WIDERSPRUCH GEGEN DIE VERARBEITUNG SIE BETREFFENDER PERSONENBEZOGENER DATEN
+            ZUM ZWECKE DERARTIGER WERBUNG EINZULEGEN; DIES GILT AUCH FÜR DAS PROFILING, SOWEIT ES MIT SOLCHER
+            DIREKTWERBUNG IN VERBINDUNG STEHT. WENN SIE WIDERSPRECHEN, WERDEN IHRE PERSONENBEZOGENEN DATEN ANSCHLIESSEND
+            NICHT MEHR ZUM ZWECKE DER DIREKTWERBUNG VERWENDET (WIDERSPRUCH NACH ART. 21 ABS. 2 DSGVO).</p>
+        <h3>Beschwerderecht bei der zuständigen Aufsichtsbehörde</h3>
+        <p>Im Falle von Verstößen gegen die DSGVO steht den Betroffenen ein Beschwerderecht bei
+            einer Aufsichtsbehörde, insbesondere in dem Mitgliedstaat ihres gewöhnlichen Aufenthalts, ihres
+            Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes zu. Das Beschwerderecht besteht unbeschadet
+            anderweitiger verwaltungsrechtlicher oder gerichtlicher Rechtsbehelfe.</p>
+        <h3>Recht auf Datenübertragbarkeit</h3>
+        <p>Sie haben das Recht, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung
+            eines Vertrags automatisiert verarbeiten, an sich oder an einen Dritten in einem gängigen, maschinenlesbaren
+            Format aushändigen zu lassen. Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen
+            verlangen, erfolgt dies nur, soweit es technisch machbar ist.</p>
+        <h3>SSL- bzw. TLS-Verschlüsselung</h3>
+        <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher
+            Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL-
+            bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des
+            Browsers von „http://“ auf „https://“ wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
+        <p>Wenn die SSL- bzw. TLS-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns
+            übermitteln, nicht von Dritten mitgelesen werden.</p>
+        <h3>Auskunft, Löschung und Berichtigung</h3>
+        <p>Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit das Recht auf
+            unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger und
+            den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung oder Löschung dieser Daten. Hierzu sowie
+            zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit unter der im Impressum
+            angegebenen Adresse an uns wenden.</p>
+        <h3>Recht auf Einschränkung der Verarbeitung</h3>
+        <p>Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten
+            zu verlangen. Hierzu können Sie sich jederzeit unter der im Impressum angegebenen Adresse an uns wenden. Das
+            Recht auf Einschränkung der Verarbeitung besteht in folgenden Fällen:</p>
+        <ul>
+            <li>Wenn Sie die Richtigkeit Ihrer bei uns gespeicherten personenbezogenen Daten
+                bestreiten, benötigen wir in der Regel Zeit, um dies zu überprüfen. Für die Dauer der Prüfung haben Sie
+                das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
+            </li>
+            <li>Wenn die Verarbeitung Ihrer personenbezogenen Daten unrechtmäßig
+                geschah/geschieht, können Sie statt der Löschung die Einschränkung der Datenverarbeitung verlangen.
+            </li>
+            <li>Wenn wir Ihre personenbezogenen Daten nicht mehr benötigen, Sie sie jedoch zur
+                Ausübung, Verteidigung oder Geltendmachung von Rechtsansprüchen benötigen, haben Sie das Recht, statt
+                der Löschung die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
+            </li>
+            <li>Wenn Sie einen Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben, muss eine
+                Abwägung zwischen Ihren und unseren Interessen vorgenommen werden. Solange noch nicht feststeht, wessen
+                Interessen überwiegen, haben Sie das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen
+                Daten zu verlangen.
+            </li>
+        </ul>
+        <p>Wenn Sie die Verarbeitung Ihrer personenbezogenen Daten eingeschränkt haben, dürfen
+            diese Daten – von ihrer Speicherung abgesehen – nur mit Ihrer Einwilligung oder zur Geltendmachung, Ausübung
+            oder Verteidigung von Rechtsansprüchen oder zum Schutz der Rechte einer anderen natürlichen oder
+            juristischen Person oder aus Gründen eines wichtigen öffentlichen Interesses der Europäischen Union oder
+            eines Mitgliedstaats verarbeitet werden.</p>
+        <h2>3. Datenerfassung auf dieser Website</h2>
+        <h3>Server-Log-Dateien</h3>
+        <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten
+            Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
+        <ul>
+            <li>Browsertyp und Browserversion</li>
+            <li>verwendetes Betriebssystem</li>
+            <li>Referrer URL</li>
+            <li>Hostname des zugreifenden Rechners</li>
+            <li>Uhrzeit der Serveranfrage</li>
+            <li>IP-Adresse</li>
+        </ul>
+        <p>Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.</p>
+        <p>Die Erfassung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Der
+            Websitebetreiber hat ein berechtigtes Interesse an der technisch fehlerfreien Darstellung und der
+            Optimierung seiner Website – hierzu müssen die Server-Log-Files erfasst werden.</p>
+        <h3>Kontaktformular</h3>
+        <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem
+            Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für
+            den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung
+            weiter.</p>
+        <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO,
+            sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher
+            Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten
+            Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder
+            auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde.</p>
+        <p>Die von Ihnen im Kontaktformular eingegebenen Daten verbleiben bei uns, bis Sie uns zur
+            Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung
+            entfällt (z.&nbsp;B. nach abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche Bestimmungen –
+            insbesondere Aufbewahrungsfristen – bleiben unberührt.</p>
+        <h3>Anfrage per E-Mail, Telefon oder Telefax</h3>
+        <p>Wenn Sie uns per E-Mail, Telefon oder Telefax kontaktieren, wird Ihre Anfrage inklusive
+            aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres
+            Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung
+            weiter.</p>
+        <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO,
+            sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher
+            Maßnahmen erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten
+            Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder
+            auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde.</p>
+        <p>Die von Ihnen an uns per Kontaktanfragen übersandten Daten verbleiben bei uns, bis Sie
+            uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die
+            Datenspeicherung entfällt (z.&nbsp;B. nach abgeschlossener Bearbeitung Ihres Anliegens). Zwingende
+            gesetzliche Bestimmungen – insbesondere gesetzliche Aufbewahrungsfristen – bleiben unberührt.</p>
+    </div>
+</div>
 
 </body>
 </html>
